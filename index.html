@@ -12,25 +12,13 @@
     header img { display: block; width: 100%; height: clamp(110px, 25vh, 230px); object-fit: contain; }
     h1 { margin: .4rem 0 0; font-size: clamp(1.12rem, 4vw, 1.65rem); }
     header p { margin: 0; color: #ffb58c; }
-    .versions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin: 10px 0; }
-    article { padding: 7px; border: 1px solid #59524e; border-radius: 6px; background: #211f1e; }
-    h2 { margin: 0 0 5px; font-size: 1rem; }
-    video { display: block; width: 100%; height: clamp(80px, 16vh, 145px); background: #111; }
-    .share { display: flex; flex-wrap: wrap; align-items: center; gap: 3px 8px; margin-top: 4px; }
     a { color: #ffcfb1; }
-    .share a, button { padding: 6px 2px; font-size: .84rem; }
-    button { background: #39332f; color: #fff; border: 1px solid #978477; border-radius: 4px; padding-inline: 8px; cursor: pointer; font-family: inherit; }
     :focus-visible { outline: 2px solid #ffd9c0; outline-offset: 2px; }
-    .silent { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; align-content: center; align-items: center; column-gap: 12px; }
-    .silent > a { grid-column: 1; grid-row: 1 / 3; }
-    .silent img { display: block; width: clamp(76px, 18vw, 124px); height: 56px; object-fit: contain; }
-    .silent h2, .silent .share { grid-column: 2; margin: 0; }
-    table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    table { margin-top: 12px; width: 100%; border-collapse: collapse; table-layout: fixed; }
     td { padding: 8px; border: 1px solid #666; vertical-align: top; font-size: .88rem; }
     td[colspan] { padding: 0; }
     .donate { display: block; padding: 9px; background: #ffb58c; color: #141414; font-weight: bold; text-align: center; text-decoration: none; }
     .donate:hover { text-decoration: underline; }
-    #status { margin: 0; }
   </style>
 </head>
 <body>
@@ -40,33 +28,6 @@
       <h1>Desaturated as my shadow kept burning.</h1>
       <p>— cinderous</p>
     </header>
-    <section class="versions" aria-label="Versions to share on Discord">
-      <article aria-labelledby="v0">
-        <h2 id="v0">Soft version</h2>
-        <video controls playsinline preload="none" poster="desaturatedasmyshadowkeptburning.png" src="Phoenix-Captioned-Soft.mp4" aria-label="Soft version"></video>
-        <div class="share">
-          <a href="Phoenix-Captioned-Soft.mp4">Open MP4</a>
-          <button hidden type="button" data-url="https://cinderous.me/Phoenix-Captioned-Soft.mp4" aria-label="Copy Discord link for soft version">Copy link</button>
-        </div>
-      </article>
-      <article aria-labelledby="v1">
-        <h2 id="v1">Louder version</h2>
-        <video controls playsinline preload="none" poster="desaturatedasmyshadowkeptburning.png" src="Phoenix-Captioned.mp4" aria-label="Louder version"></video>
-        <div class="share">
-          <a href="Phoenix-Captioned.mp4">Open MP4</a>
-          <button hidden type="button" data-url="https://cinderous.me/Phoenix-Captioned.mp4" aria-label="Copy Discord link for louder version">Copy link</button>
-        </div>
-      </article>
-      <article class="silent" aria-labelledby="v2">
-        <h2 id="v2">Silent GIF</h2>
-        <a href="Phoenix-Captioned.gif" aria-label="Open full-size silent GIF"><img src="Phoenix-Captioned.gif" alt="Animated Phoenix meme with caption"></a>
-        <div class="share">
-          <a href="Phoenix-Captioned.gif">Open GIF</a>
-          <button hidden type="button" data-url="https://cinderous.me/Phoenix-Captioned.gif" aria-label="Copy Discord link for silent gif">Copy link</button>
-        </div>
-      </article>
-    </section>
-    <p id="status" role="status"></p>
     <table aria-label="How donations are used">
       <tbody>
         <tr><td colspan="2"><a class="donate" href="https://ko-fi.com/cinderous">Support me on Ko-fi</a></td></tr>
@@ -77,21 +38,5 @@
       </tbody>
     </table>
   </main>
-  <script>
-    const status = document.querySelector('#status');
-    for (const button of document.querySelectorAll('[data-url]')) {
-      button.hidden = false;
-      button.addEventListener('click', async () => {
-        const url = button.dataset.url;
-        const version = button.closest('article').querySelector('h2').textContent;
-        try {
-          await navigator.clipboard.writeText(url);
-          status.textContent = version + ' link copied for Discord.';
-        } catch {
-          window.prompt('Copy this link for Discord', url);
-        }
-      });
-    }
-  </script>
 </body>
 </html>
